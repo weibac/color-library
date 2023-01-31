@@ -1,4 +1,3 @@
-import parameters as p
 
 
 class Colorer():
@@ -10,14 +9,11 @@ class Colorer():
     _base = '\033[38;2;{};{};{}m'  # ;R;G;B
     _endc = '\033[0m'
 
-    def __init__(self, name, path) -> None:
-        self.name = name
-        self.load_palette(path)
-
-    def load_palette(self, path):
+    def load_palette(self, name, path):
         """
         Reads csv and sets self.colors as dict {color_name: (R, G, B)}
         """
+        self.name = name
         with open(path, 'r') as r:
             lines = r.readlines()
         for a in range(len(lines)):
@@ -54,6 +50,7 @@ class Colorer():
 
 
 if __name__ == '__main__':
+    import colorlibrary.demo_parameters as p
     cube9 = Colorer(p.NAME_CUBE9, p.PATH_CUBE9)
     rainbow = Colorer(p.NAME_RAINBOW, p.PATH_RAINBOW)
     cube9.palette_showcase()
